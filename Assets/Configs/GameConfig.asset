@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50bb67b5b7e0d337c899ca427021847f, type: 3}
+  m_Name: GameConfig
+  m_EditorClassIdentifier: 
+  <Network>k__BackingField:
+    <MaxPlayers>k__BackingField: 4
+  <Unit>k__BackingField:
+    <SnakePrefab>k__BackingField: {fileID: 7921702702585595313, guid: d929348673b9b78b69df8d7479df23d5,
+      type: 3}
