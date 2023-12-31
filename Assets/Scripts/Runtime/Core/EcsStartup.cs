@@ -17,6 +17,7 @@ namespace SA.Runtime.Core
         private EcsWorld _world;        
         private IEcsSystems _updateSystems;
         private IEcsSystems _fixedUpdateSystems;
+        private IEcsSystems _lateUpdateSystems;
         private SharedData _sharedData;
 
         [Inject]
@@ -43,6 +44,7 @@ namespace SA.Runtime.Core
             _world = new EcsWorld();
             _updateSystems = new EcsSystems(_world, _sharedData);
             _fixedUpdateSystems = new EcsSystems(_world, _sharedData);
+            _lateUpdateSystems = new EcsSystems(_world, _sharedData);
             
             RegisterSystems();
 
@@ -55,22 +57,31 @@ namespace SA.Runtime.Core
 
             _updateSystems                
                 .AddWorld (eventsWorld, GameConst.World.EVENTS)
-#if UNITY_EDITOR
+            #if UNITY_EDITOR
                 .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem (GameConst.World.EVENTS))
                 .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ())
-#endif
+            #endif
                 .Add(new CreatePlayerSystem())
-                .Add(new PlayerInputSystem())
+                .Add(new PlayerInputSystem())         
                 .Init();
 
 
             _fixedUpdateSystems                
                 .AddWorld (eventsWorld, GameConst.World.EVENTS)
-#if UNITY_EDITOR
+            #if UNITY_EDITOR
                 .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem (GameConst.World.EVENTS))
                 .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ())
-#endif
+            #endif
                 .Add(new PlayerMovementSystem())
+                .Init();
+
+
+            _lateUpdateSystems                
+                .AddWorld (eventsWorld, GameConst.World.EVENTS)
+            #if UNITY_EDITOR
+                .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem (GameConst.World.EVENTS))
+                .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ())
+            #endif
                 .Init();
         }
 
@@ -84,13 +95,21 @@ namespace SA.Runtime.Core
             _fixedUpdateSystems?.Run ();
         }
 
+        private void LateUpdate() 
+        {
+            _lateUpdateSystems?.Run ();
+        }
+
         private void OnDestroy() 
         {            
             _updateSystems?.Destroy ();
             _updateSystems = null;  
 
             _fixedUpdateSystems?.Destroy ();
-            _fixedUpdateSystems = null;         
+            _fixedUpdateSystems = null;  
+
+            _lateUpdateSystems?.Destroy ();
+            _lateUpdateSystems = null;        
 
             _world?.Destroy ();
             _world = null;            

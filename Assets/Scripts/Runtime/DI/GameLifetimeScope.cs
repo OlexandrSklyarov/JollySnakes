@@ -33,7 +33,7 @@ namespace SA.Runtime.DI
 #if UNITY_ANDROID
             builder.Register<IInputService, KeyboardInput>(Lifetime.Singleton);
 #elif UNITY_EDITOR
-            builder.Register<IInputService, KeyboardInput>(Lifetime.Singleton);
+            builder.Register<IInputService, DeviceInput>(Lifetime.Singleton);
 #endif
         }
     }

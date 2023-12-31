@@ -6,6 +6,6 @@ namespace SA.Runtime.Core.Data.Configs
     public sealed class SnakeConfig : ScriptableObject
     {
         [field: SerializeField, Min(1f)] public float Speed {get; private set;} = 5f;
-        
+        [field: SerializeField, Min(1f)] public float RotationSpeed {get; private set;} = 15f;        
     }
 }

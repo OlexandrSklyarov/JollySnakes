@@ -1,8 +1,6 @@
 using Leopotam.EcsLite;
 using SA.Runtime.Core.Components;
-using SA.Runtime.Core.Components.Player;
 using SA.Runtime.Core.Data;
-using SA.Runtime.Core.Services.Input;
 
 namespace SA.Runtime.Core.Systems
 {
@@ -23,8 +21,9 @@ namespace SA.Runtime.Core.Systems
 
             world.GetPool<LocalPlayerTag>().Add(entity);
             world.GetPool<InputComponent>().Add(entity);
+            world.GetPool<MovementComponent>().Add(entity);
             
-            ref var view = ref world.GetPool<SnakeViewComponent>().Add(entity);
+            ref var view = ref world.GetPool<PlayerViewComponent>().Add(entity);
             view.ViewRef = snakeView;
         }       
     }

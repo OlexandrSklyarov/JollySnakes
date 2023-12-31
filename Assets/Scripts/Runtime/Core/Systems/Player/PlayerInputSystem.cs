@@ -31,10 +31,8 @@ namespace SA.Runtime.Core.Systems
             {
                 ref var input = ref _inputPool.Get(ent);
 
-                var movement = _inputService.Movement;
-                input.Vert = movement.y;
-                input.Hor = movement.x;
-
+                input.Movement = _inputService.Movement;
+                input.LookDirection = _inputService.Look;
                 input.IsAttack = _inputService.Attack;
             }
         }
