@@ -6,6 +6,7 @@ using SA.Runtime.Core.Services.Time;
 using SA.Runtime.Core.Views;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 namespace SA.Runtime.Core.Systems
 {
@@ -38,19 +39,30 @@ namespace SA.Runtime.Core.Systems
         public void Run(IEcsSystems systems)
         {
             foreach(var ent in _filter)
-            {                
+            {
                 ref var view = ref _viewPool.Get(ent);
-                ref var tongue = ref _tonguePool.Get(ent); 
-              
-                if (tongue.NextAttackTime > _time.Time)   
+                ref var tongue = ref _tonguePool.Get(ent);
+
+                if (tongue.NextAttackTime > _time.Time)
                     continue;
 
-                var config = view.ViewRef.Config;    
+                SetAttackCooldown(ref view, ref tongue);
 
-                tongue.NextAttackTime = _time.Time + config.Tongue.AttackTime;  
+                TryAttack(ref view, ref tongue);
 
-                TryAttack(ref view, ref tongue);        
+                RestoreAttackDistanceMultiplier(ref tongue);
             }
+        }
+
+        private void SetAttackCooldown(ref PlayerViewComponent view, ref TongueComponent tongue)
+        {
+            tongue.NextAttackTime = _time.Time + view.ViewRef.Config.Tongue.AttackTime;
+        }
+      
+
+        private void RestoreAttackDistanceMultiplier(ref TongueComponent tongue)
+        {
+            tongue.AttackDistanceMultiplier = 1f;  
         }
 
         private void TryAttack(ref PlayerViewComponent view, ref TongueComponent tongue)

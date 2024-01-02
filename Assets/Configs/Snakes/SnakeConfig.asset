@@ -13,11 +13,19 @@ MonoBehaviour:
   m_Name: SnakeConfig
   m_EditorClassIdentifier: 
   <Movement>k__BackingField:
-    <Speed>k__BackingField: 20
+    <Speed>k__BackingField: 12
+    <Acceleration>k__BackingField: 70
     <RotationSpeed>k__BackingField: 15
+    <GroundLayerMask>k__BackingField:
+      serializedVersion: 2
+      m_Bits: 1
+    <CheckGroundBounds>k__BackingField: {x: 1, y: 0.1, z: 1}
   <Tongue>k__BackingField:
     <BaseBoundSize>k__BackingField: {x: 1, y: 1, z: 6}
-    <AttackTime>k__BackingField: 0.3
+    <AttackTime>k__BackingField: 0.25
     <FoodLayerMask>k__BackingField:
       serializedVersion: 2
       m_Bits: 64
+  <Jump>k__BackingField:
+    <Force>k__BackingField: 700
+    <Cooldown>k__BackingField: 0.25

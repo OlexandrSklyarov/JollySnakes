@@ -58,6 +58,7 @@ namespace SA.Runtime.Core
         {
             var eventsWorld = new EcsWorld ();
 
+            //update
             _updateSystems                
                 .AddWorld (eventsWorld, GameConst.World.EVENTS)
             #if UNITY_EDITOR
@@ -65,11 +66,14 @@ namespace SA.Runtime.Core
                 .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ())
             #endif
                 .Add(new CreatePlayerSystem())
+                .Add(new PlayerCheckGroundSystem())
                 .Add(new PlayerInputSystem()) 
                 .Add(new PlayerAttackSystem())        
+                .Add(new PlayerSpeedLimitSystem())  
+                .Add(new PlayerJumpSystem())      
                 .Init();
 
-
+            //fixed update
             _fixedUpdateSystems                
                 .AddWorld (eventsWorld, GameConst.World.EVENTS)
             #if UNITY_EDITOR
@@ -79,7 +83,7 @@ namespace SA.Runtime.Core
                 .Add(new PlayerMovementSystem())
                 .Init();
 
-
+            //late update
             _lateUpdateSystems                
                 .AddWorld (eventsWorld, GameConst.World.EVENTS)
             #if UNITY_EDITOR

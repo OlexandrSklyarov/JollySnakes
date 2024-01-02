@@ -44,9 +44,10 @@ namespace SA.Runtime.Core.Systems
 
                 input.Movement = _inputService.Movement;
                 input.LookDirection = _inputService.Look;
+                input.IsJumpPressed = _inputService.IsJumpPressed;
                 
                 //add attack state
-                if(_inputService.Attack)
+                if(_inputService.IsAttack)
                 {
                     _attackStatePool.Add(ent);
                 }

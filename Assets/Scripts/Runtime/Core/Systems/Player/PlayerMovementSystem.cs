@@ -70,12 +70,9 @@ namespace SA.Runtime.Core.Systems
 
         private void Movement(ref InputComponent input, ref PlayerViewComponent view, ref MovementComponent movement)
         {
+            view.ViewRef.RB.drag = (movement.IsGrounded) ? 2f : 0f;
             movement.CameraRelativeMovement = GetRelativeCameraDirection(ref view, ref input);
-
-            var newPos = view.ViewRef.RB.transform.position +
-                movement.CameraRelativeMovement * (view.ViewRef.Config.Movement.Speed * _time.FixedDeltaTime);
-
-            view.ViewRef.RB.MovePosition(newPos);
+            view.ViewRef.RB.AddForce(view.ViewRef.Config.Movement.Acceleration * movement.CameraRelativeMovement, ForceMode.Acceleration);
         }
 
         private Vector3 GetRelativeCameraDirection(ref PlayerViewComponent view, ref InputComponent input)

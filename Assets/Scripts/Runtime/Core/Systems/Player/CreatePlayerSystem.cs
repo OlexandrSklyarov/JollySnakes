@@ -22,6 +22,7 @@ namespace SA.Runtime.Core.Systems
             world.GetPool<LocalPlayerTag>().Add(entity);
             world.GetPool<InputComponent>().Add(entity);
             world.GetPool<MovementComponent>().Add(entity);
+            world.GetPool<JumpComponent>().Add(entity);
             
             //view
             ref var view = ref world.GetPool<PlayerViewComponent>().Add(entity);
