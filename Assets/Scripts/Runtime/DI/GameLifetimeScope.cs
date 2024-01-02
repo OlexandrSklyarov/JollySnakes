@@ -1,6 +1,7 @@
 using Cinemachine;
 using SA.Runtime.Core;
 using SA.Runtime.Core.Data.Configs;
+using SA.Runtime.Core.Services;
 using SA.Runtime.Core.Services.Factories;
 using SA.Runtime.Core.Services.Input;
 using SA.Runtime.Core.Services.Time;
@@ -21,6 +22,7 @@ namespace SA.Runtime.DI
             builder.RegisterEntryPoint<TimeService>().AsSelf();
 
             builder.Register<IUnitFactory, LocalUnitFactory>(Lifetime.Singleton);
+            builder.Register<IPhysicsOverlapService, PhysicsOverlapService>(Lifetime.Singleton);
 
             builder.RegisterComponentInHierarchy<EcsStartup>();
             builder.RegisterComponentInHierarchy<CinemachineFreeLook>();

@@ -23,8 +23,13 @@ namespace SA.Runtime.Core.Systems
             world.GetPool<InputComponent>().Add(entity);
             world.GetPool<MovementComponent>().Add(entity);
             
+            //view
             ref var view = ref world.GetPool<PlayerViewComponent>().Add(entity);
             view.ViewRef = snakeView;
+
+            //tongue
+            ref var tongue = ref world.GetPool<TongueComponent>().Add(entity);
+            tongue.AttackDistanceMultiplier = 1f;
         }       
     }
 }

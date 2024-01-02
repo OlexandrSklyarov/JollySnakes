@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7972552980301439617}
   m_Layer: 0
-  m_Name: Tongue
+  m_Name: TongueOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,8 +82,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Config>k__BackingField: {fileID: 11400000, guid: e14d0844dc4304981bfac10e5698ba7e,
     type: 2}
-  <ViewBody>k__BackingField: {fileID: 510645317179868157}
-  <OrientationLook>k__BackingField: {fileID: 2645267296169970594}
+  <Tongue>k__BackingField:
+    <Tip>k__BackingField: {fileID: 7813718601489075661}
+    <Origin>k__BackingField: {fileID: 7972552980301439617}
 --- !u!54 &606316535932690567
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -110,7 +111,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!136 &7045294362114267605
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -175,7 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7813718601489075661}
   m_Layer: 0
-  m_Name: Model
+  m_Name: TipModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -62,7 +62,7 @@ namespace SA.Runtime.Core.Systems
             (
                 view.ViewRef.RB.transform.rotation,
                 Quaternion.LookRotation(lookAt),
-                view.ViewRef.Config.RotationSpeed * _time.FixedDeltaTime
+                view.ViewRef.Config.Movement.RotationSpeed * _time.FixedDeltaTime
             );
 
             view.ViewRef.RB.MoveRotation(newRot);
@@ -73,7 +73,7 @@ namespace SA.Runtime.Core.Systems
             movement.CameraRelativeMovement = GetRelativeCameraDirection(ref view, ref input);
 
             var newPos = view.ViewRef.RB.transform.position +
-                movement.CameraRelativeMovement * (view.ViewRef.Config.Speed * _time.FixedDeltaTime);
+                movement.CameraRelativeMovement * (view.ViewRef.Config.Movement.Speed * _time.FixedDeltaTime);
 
             view.ViewRef.RB.MovePosition(newPos);
         }

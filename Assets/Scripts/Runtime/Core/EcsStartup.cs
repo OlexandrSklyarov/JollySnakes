@@ -9,6 +9,7 @@ using Cinemachine;
 using SA.Runtime.Core.Systems;
 using SA.Runtime.Core.Data.Configs;
 using SA.Runtime.Core.Services.Factories;
+using SA.Runtime.Core.Services;
 
 namespace SA.Runtime.Core 
 {
@@ -26,7 +27,8 @@ namespace SA.Runtime.Core
             TimeService timeService,
             IInputService inputService,
             CinemachineFreeLook followCamera,
-            IUnitFactory unitFactory
+            IUnitFactory unitFactory,
+            IPhysicsOverlapService overlapService
         )
         {
             _sharedData = new SharedData()
@@ -35,7 +37,8 @@ namespace SA.Runtime.Core
                 TimeService = timeService,
                 InputService = inputService,
                 FollowCamera = followCamera,
-                UnitFactory = unitFactory
+                UnitFactory = unitFactory,
+                OverlapService = overlapService
             };
         }
 
@@ -62,7 +65,8 @@ namespace SA.Runtime.Core
                 .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ())
             #endif
                 .Add(new CreatePlayerSystem())
-                .Add(new PlayerInputSystem())         
+                .Add(new PlayerInputSystem()) 
+                .Add(new PlayerAttackSystem())        
                 .Init();
 
 

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace SA.Runtime.Core.Data.Configs
@@ -5,7 +6,22 @@ namespace SA.Runtime.Core.Data.Configs
     [CreateAssetMenu(menuName = "SO/Snake/SnakeConfig", fileName = "SnakeConfig")]
     public sealed class SnakeConfig : ScriptableObject
     {
-        [field: SerializeField, Min(1f)] public float Speed {get; private set;} = 5f;
-        [field: SerializeField, Min(1f)] public float RotationSpeed {get; private set;} = 15f;        
+        [field: SerializeField] public Movement Movement {get; private set;}
+        [field: SerializeField] public Tongue Tongue {get; private set;}       
+    }
+
+    [Serializable]
+    public class Movement
+    {
+        [field: SerializeField, Min(1f)] public float Speed {get; private set;} = 20f;
+        [field: SerializeField, Min(1f)] public float RotationSpeed {get; private set;} = 6f;  
+    }
+
+    [Serializable]
+    public class Tongue
+    {
+        [field: SerializeField] public Vector3 BaseBoundSize {get; private set;} = new Vector3(1f, 1f, 4f);
+        [field: SerializeField, Min(0.1f)] public float AttackTime {get; private set;} = 0.5f;  
+        [field: SerializeField] public LayerMask FoodLayerMask {get; private set;}  
     }
 }
