@@ -21,7 +21,7 @@ MonoBehaviour:
       m_Bits: 1
     <CheckGroundBounds>k__BackingField: {x: 1, y: 0.1, z: 1}
   <Tongue>k__BackingField:
-    <BaseBoundSize>k__BackingField: {x: 1, y: 1, z: 6}
+    <BaseBoundSize>k__BackingField: {x: 2, y: 1, z: 6}
     <AttackTime>k__BackingField: 0.25
     <FoodLayerMask>k__BackingField:
       serializedVersion: 2

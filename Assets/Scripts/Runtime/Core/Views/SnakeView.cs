@@ -19,8 +19,15 @@ namespace SA.Runtime.Core.Views
         [Conditional("UNITY_EDITOR")]
         private void OnDrawGizmos() 
         {
-            Gizmos.color = Color.green;                
+            Gizmos.color = Color.blue;                
             Gizmos.DrawLine(Tongue.Origin.position, Tongue.Origin.position + Tongue.Origin.forward * Config.Tongue.BaseBoundSize.z);
+
+            Gizmos.color = Color.green; 
+            Gizmos.DrawWireCube
+            (
+                Tongue.Origin.position + Tongue.Origin.forward * (Config.Tongue.BaseBoundSize.z * 0.5f),
+                Config.Tongue.BaseBoundSize
+            );
         }
     }
 }

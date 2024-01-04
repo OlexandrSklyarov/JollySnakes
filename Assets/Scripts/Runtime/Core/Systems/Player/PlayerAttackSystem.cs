@@ -118,6 +118,7 @@ namespace SA.Runtime.Core.Systems
                 {
                     //take
                     target.transform.SetParent(tip);
+                    target.transform.DOScale(Vector3.one * 0.01f, duration * 0.9f);
 
                     //return with food
                     tip.DOLocalMove(Vector3.zero, duration)
