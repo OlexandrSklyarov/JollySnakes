@@ -70,7 +70,7 @@ namespace SA.Runtime.Core.Systems
 
         private void Movement(ref InputComponent input, ref PlayerViewComponent view, ref MovementComponent movement)
         {
-            view.ViewRef.RB.drag = (movement.IsGrounded) ? 2f : 0f;
+            view.ViewRef.RB.drag = (movement.IsGrounded) ? 2f : 0.05f;
             movement.CameraRelativeMovement = GetRelativeCameraDirection(ref view, ref input);
             view.ViewRef.RB.AddForce(view.ViewRef.Config.Movement.Acceleration * movement.CameraRelativeMovement, ForceMode.Acceleration);
         }
