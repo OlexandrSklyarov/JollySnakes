@@ -8,6 +8,7 @@ namespace SA.Runtime.Core.Systems
     {
         private EcsFilter _filter;
         private EcsPool<PlayerViewComponent> _viewPool;
+        private EcsPool<AttackStateComponent> _attackStatePool;
 
         public void Init(IEcsSystems systems)
         {
@@ -19,6 +20,7 @@ namespace SA.Runtime.Core.Systems
                 .End();
             
             _viewPool = world.GetPool<PlayerViewComponent>();
+            _attackStatePool = world.GetPool<AttackStateComponent>();
         }
 
         public void Run(IEcsSystems systems)
@@ -29,12 +31,18 @@ namespace SA.Runtime.Core.Systems
 
                 var curVelocity = view.ViewRef.RB.velocity;
                 var horVelocity = new Vector3(curVelocity.x, 0f, curVelocity.z);
-                var speed = view.ViewRef.Config.Movement.Speed;
+                var speed = view.ViewRef.Config.Movement.MaxSpeed;
 
                 if (horVelocity.sqrMagnitude <= speed * speed) continue;
 
                 var limitedVelocity = horVelocity.normalized * speed;
-                view.ViewRef.RB.velocity = new Vector3(limitedVelocity.x, curVelocity.y, limitedVelocity.z);            
+
+                if (_attackStatePool.Has(ent))
+                {
+                    limitedVelocity = horVelocity.normalized * view.ViewRef.Config.Movement.MinSpeed;
+                }    
+                
+                view.ViewRef.RB.velocity = new Vector3(limitedVelocity.x, curVelocity.y, limitedVelocity.z);       
             }
         }
     }

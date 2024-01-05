@@ -110,6 +110,8 @@ namespace SA.Runtime.Core.Systems
 
         private void TakeFood(ref PlayerViewComponent view, FoodView target, float duration)
         {           
+            var config = view.ViewRef.Config;
+
             var tip = view.ViewRef.Tongue.Tip;
             var targetDir = target.transform.position - tip.position;
             tip.rotation = Quaternion.LookRotation(targetDir);
@@ -133,7 +135,8 @@ namespace SA.Runtime.Core.Systems
                             //eat
                             target.OnEat();
                             tip.localRotation = Quaternion.identity;
-                        });                    
+                        })
+                        .SetEase(config.Tongue.EatCurve);                    
                 });
         }
     }
