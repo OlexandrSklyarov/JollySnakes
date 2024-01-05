@@ -1,11 +1,15 @@
+using System;
 using UnityEngine;
 
 namespace SA.Runtime.Core.Views
 {
     public class FoodView : MonoBehaviour
     {
+        private Collider _collider;
+
         private void Awake() 
         {
+            _collider = GetComponent<Collider>();
             Init();
         }
 
@@ -44,6 +48,12 @@ namespace SA.Runtime.Core.Views
         public void OnEat()
         {
             Destroy(this.gameObject);
+        }
+
+        public void Take(Transform tip)
+        {
+            transform.SetParent(tip);
+            _collider.enabled = false;
         }
     }
 }

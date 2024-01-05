@@ -1,4 +1,3 @@
-
 using SA.Runtime.Core.Data.Configs;
 using UnityEngine;
 
@@ -8,6 +7,7 @@ namespace SA.Runtime.Core.Views
     {
         public Rigidbody RB { get; }
         public SnakeTongueView Tongue { get; }
-        public SnakeConfig Config { get; }         
+        public SnakeConfig Config { get; }
+        public Transform TailRoot { get; }
     }
 }

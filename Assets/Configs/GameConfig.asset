@@ -17,3 +17,5 @@ MonoBehaviour:
   <Unit>k__BackingField:
     <SnakePrefab>k__BackingField: {fileID: 7921702702585595313, guid: d929348673b9b78b69df8d7479df23d5,
       type: 3}
+    <TailPartPrefab>k__BackingField: {fileID: 703542108607716446, guid: eebb80c5288b8811f97e7b1037849cc0,
+      type: 3}

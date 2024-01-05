@@ -9,6 +9,7 @@ namespace SA.Runtime.Core.Data.Configs
         [field: SerializeField] public Movement Movement {get; private set;}
         [field: Space, SerializeField] public Tongue Tongue {get; private set;}
         [field: Space, SerializeField] public Jump Jump {get; private set;}
+        [field: Space, SerializeField] public Tail Tail {get; private set;}
     }
 
     [Serializable]
@@ -34,5 +35,11 @@ namespace SA.Runtime.Core.Data.Configs
     {
         [field: SerializeField, Min(1f)] public float Force {get; private set;} = 500f;
         [field: SerializeField, Min(0.1f)] public float Cooldown {get; private set;} = 0.25f;  
+    }
+
+    [Serializable]
+    public class Tail
+    {
+        [field: SerializeField, Min(1)] public int MaxVisibleCount {get; private set;} = 8;
     }
 }

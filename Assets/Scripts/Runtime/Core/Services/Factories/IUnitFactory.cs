@@ -5,5 +5,6 @@ namespace SA.Runtime.Core.Services.Factories
     public interface IUnitFactory
     {
         public SnakeView CreateSnake();
+        public TailPartView CreateTailPart();
     }
 }

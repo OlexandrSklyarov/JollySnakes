@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Leopotam.EcsLite;
 using SA.Runtime.Core.Components;
 using SA.Runtime.Core.Data;
@@ -23,6 +24,10 @@ namespace SA.Runtime.Core.Systems
             world.GetPool<InputComponent>().Add(entity);
             world.GetPool<MovementComponent>().Add(entity);
             world.GetPool<JumpComponent>().Add(entity);
+
+            //tail
+            ref var tail = ref world.GetPool<SnakeTailComponent>().Add(entity);
+            tail.PartEntities = new Stack<int>();
             
             //view
             ref var view = ref world.GetPool<PlayerViewComponent>().Add(entity);

@@ -27,5 +27,16 @@ namespace SA.Runtime.Core.Services.Factories
 
             return snake;
         }
+
+        TailPartView IUnitFactory.CreateTailPart()
+        {
+            var snake = UnityEngine.Object.Instantiate
+            (
+                _config.Unit.TailPartPrefab,
+                _container
+            );
+
+            return snake;
+        }
     }
 }

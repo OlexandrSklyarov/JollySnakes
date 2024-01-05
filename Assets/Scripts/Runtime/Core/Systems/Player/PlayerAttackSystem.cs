@@ -4,9 +4,9 @@ using SA.Runtime.Core.Data;
 using SA.Runtime.Core.Services;
 using SA.Runtime.Core.Services.Time;
 using SA.Runtime.Core.Views;
+using SA.Runtime.Core.Events;
 using UnityEngine;
 using DG.Tweening;
-using System;
 
 namespace SA.Runtime.Core.Systems
 {
@@ -15,6 +15,7 @@ namespace SA.Runtime.Core.Systems
         private EcsFilter _filter;
         private EcsPool<PlayerViewComponent> _viewPool;
         private EcsPool<TongueComponent> _tonguePool;
+        private EcsPool<IncreaseSnakeTailEvent> _incTailEventPool;
         private TimeService _time;
         private IPhysicsOverlapService _overlapService;
 
@@ -34,6 +35,7 @@ namespace SA.Runtime.Core.Systems
 
             _viewPool = world.GetPool<PlayerViewComponent>();
             _tonguePool = world.GetPool<TongueComponent>();
+            _incTailEventPool = world.GetPool<IncreaseSnakeTailEvent>();
         }
 
         public void Run(IEcsSystems systems)
@@ -48,7 +50,10 @@ namespace SA.Runtime.Core.Systems
 
                 SetAttackCooldown(ref view, ref tongue);
 
-                TryAttack(ref view, ref tongue);
+                if (TryEatFood(ref view, ref tongue))
+                {
+                    _incTailEventPool.Add(ent);
+                }
 
                 RestoreAttackDistanceMultiplier(ref tongue);
             }
@@ -65,7 +70,7 @@ namespace SA.Runtime.Core.Systems
             tongue.AttackDistanceMultiplier = 1f;  
         }
 
-        private void TryAttack(ref PlayerViewComponent view, ref TongueComponent tongue)
+        private bool TryEatFood(ref PlayerViewComponent view, ref TongueComponent tongue)
         {
             var config = view.ViewRef.Config; 
             var duration = (tongue.NextAttackTime - _time.Time) * 0.5f;
@@ -82,10 +87,11 @@ namespace SA.Runtime.Core.Systems
             ))
             {
                 TakeFood(ref view, target, duration);
-                return;
+                return true;
             }
 
             SimpleAttack(ref view, duration);
+            return false;
         }
 
         private void SimpleAttack(ref PlayerViewComponent view, float duration)
@@ -117,7 +123,7 @@ namespace SA.Runtime.Core.Systems
                 .OnComplete(() =>
                 {
                     //take
-                    target.transform.SetParent(tip);
+                    target.Take(tip);
                     target.transform.DOScale(Vector3.one * 0.01f, duration * 0.9f);
 
                     //return with food

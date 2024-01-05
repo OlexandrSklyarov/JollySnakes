@@ -8,6 +8,7 @@ namespace SA.Runtime.Core.Views
     public sealed class SnakeView : MonoBehaviour, IPlayerView
     {
         public Rigidbody RB {get; private set;}
+        [field: SerializeField] public Transform TailRoot {get; private set;} 
         [field: SerializeField] public SnakeConfig Config {get; private set;} 
         [field: SerializeField] public SnakeTongueView Tongue {get; private set;} 
         

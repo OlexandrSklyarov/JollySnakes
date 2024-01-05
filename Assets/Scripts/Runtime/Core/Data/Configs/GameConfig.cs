@@ -21,5 +21,6 @@ namespace SA.Runtime.Core.Data.Configs
     public sealed class UnitConfig
     {
         [field: SerializeField] public SnakeView SnakePrefab {get; private set;}
+        [field: SerializeField] public TailPartView TailPartPrefab {get; private set;}
     }
 }

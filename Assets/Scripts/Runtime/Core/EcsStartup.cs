@@ -70,7 +70,8 @@ namespace SA.Runtime.Core
                 .Add(new PlayerInputSystem()) 
                 .Add(new PlayerAttackSystem())        
                 .Add(new PlayerSpeedLimitSystem())  
-                .Add(new PlayerJumpSystem())      
+                .Add(new PlayerJumpSystem())   
+                .Add(new AddSnakeTailSystem())   
                 .Init();
 
             //fixed update
@@ -81,6 +82,7 @@ namespace SA.Runtime.Core
                 .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ())
             #endif
                 .Add(new PlayerMovementSystem())
+                .Add(new MoveTailPartsSystem())
                 .Init();
 
             //late update
