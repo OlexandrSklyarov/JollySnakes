@@ -44,6 +44,9 @@ namespace SA.Runtime.Core
 
         private void Start() 
         {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+
             _world = new EcsWorld();
             _updateSystems = new EcsSystems(_world, _sharedData);
             _fixedUpdateSystems = new EcsSystems(_world, _sharedData);
