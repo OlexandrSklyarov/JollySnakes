@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: SnakeConfig
   m_EditorClassIdentifier: 
   <Movement>k__BackingField:
-    <MaxSpeed>k__BackingField: 12
+    <MaxSpeed>k__BackingField: 15
     <MinSpeed>k__BackingField: 2
     <Acceleration>k__BackingField: 70
     <RotationSpeed>k__BackingField: 15
+    <AdditionalGravity>k__BackingField: 6
     <GroundLayerMask>k__BackingField:
       serializedVersion: 2
       m_Bits: 1
@@ -52,7 +53,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   <Jump>k__BackingField:
-    <Force>k__BackingField: 600
+    <Force>k__BackingField: 750
     <Cooldown>k__BackingField: 0.25
   <Tail>k__BackingField:
     <MaxVisibleCount>k__BackingField: 8

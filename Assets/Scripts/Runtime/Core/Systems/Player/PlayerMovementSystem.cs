@@ -80,6 +80,13 @@ namespace SA.Runtime.Core.Systems
                 ForceMode.Acceleration
             );
 
+            //apply additional gravity
+            view.ViewRef.RB.AddForce
+            (
+                new Vector3(0f, -view.ViewRef.Config.Movement.AdditionalGravity, 0f), 
+                ForceMode.Acceleration
+            );
+
             if (input.Movement == Vector2.zero)
             {
                 DampingVelocity(ref view);
