@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Movement>k__BackingField:
     <MaxSpeed>k__BackingField: 12
-    <MinSpeed>k__BackingField: 0.1
+    <MinSpeed>k__BackingField: 2
     <Acceleration>k__BackingField: 70
     <RotationSpeed>k__BackingField: 15
     <GroundLayerMask>k__BackingField:

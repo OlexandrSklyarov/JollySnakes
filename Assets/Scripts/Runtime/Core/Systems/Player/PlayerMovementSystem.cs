@@ -1,3 +1,4 @@
+using System;
 using Leopotam.EcsLite;
 using SA.Runtime.Core.Components;
 using SA.Runtime.Core.Data;
@@ -70,12 +71,34 @@ namespace SA.Runtime.Core.Systems
 
         private void Movement(ref InputComponent input, ref PlayerViewComponent view, ref MovementComponent movement)
         {
-            view.ViewRef.RB.drag = (movement.IsGrounded) ? 2f : 0.05f;
-            movement.CameraRelativeMovement = GetRelativeCameraDirection(ref view, ref input);
-            view.ViewRef.RB.AddForce(view.ViewRef.Config.Movement.Acceleration * movement.CameraRelativeMovement, ForceMode.Acceleration);
+            view.ViewRef.RB.drag = (movement.IsGrounded) ? 2f : 0.005f;
+            movement.CameraRelativeMovement = GetRelativeCameraDirection(ref input);
+            
+            view.ViewRef.RB.AddForce
+            (
+                view.ViewRef.Config.Movement.Acceleration * movement.CameraRelativeMovement, 
+                ForceMode.Acceleration
+            );
+
+            if (input.Movement == Vector2.zero)
+            {
+                DampingVelocity(ref view);
+            }
         }
 
-        private Vector3 GetRelativeCameraDirection(ref PlayerViewComponent view, ref InputComponent input)
+        private void DampingVelocity(ref PlayerViewComponent view)
+        {
+            var curVel = view.ViewRef.RB.velocity;
+            var newVel = new Vector3(curVel.x, 0f, curVel.z);
+
+            if (newVel.magnitude < view.ViewRef.Config.Movement.MinSpeed) return;
+
+            newVel *= 0.95f;
+            newVel.y = curVel.y;
+            view.ViewRef.RB.velocity = newVel;
+        }
+
+        private Vector3 GetRelativeCameraDirection(ref InputComponent input)
         {         
             var camForward = _camMain.transform.forward;           
             var camRight = _camMain.transform.right;           
