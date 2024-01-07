@@ -19,3 +19,5 @@ MonoBehaviour:
       type: 3}
     <TailPartPrefab>k__BackingField: {fileID: 703542108607716446, guid: eebb80c5288b8811f97e7b1037849cc0,
       type: 3}
+    <FoodPrefab>k__BackingField: {fileID: 7779068639110101922, guid: 26e4fc8400259dc0292c1452372eaff2,
+      type: 3}

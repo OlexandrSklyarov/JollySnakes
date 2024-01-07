@@ -94,5 +94,17 @@ namespace Util
             dir.Normalize();
             return Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
         }
+
+        public static Vector3 AddDirectionSpread(this Vector3 dir, float spread)
+        {
+            var modifierDir =  dir + new Vector3
+            (
+                UnityEngine.Random.Range(-spread, spread),
+                UnityEngine.Random.Range(-spread, spread),
+                UnityEngine.Random.Range(-spread, spread)
+            );
+
+            return modifierDir.normalized;
+        }
     }
 }

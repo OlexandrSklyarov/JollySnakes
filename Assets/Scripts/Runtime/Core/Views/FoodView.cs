@@ -1,57 +1,46 @@
-using System;
+using Leopotam.EcsLite;
+using SA.Runtime.Core.Events;
 using UnityEngine;
 
 namespace SA.Runtime.Core.Views
 {
+    [RequireComponent(typeof(Rigidbody))]
     public class FoodView : MonoBehaviour
     {
+        public Rigidbody RB {get; private set;}
+
         private Collider _collider;
+        private MeshRenderer _renderer;
+        private EcsWorld _world;
+        private EcsPackedEntity _packedEntity;
 
         private void Awake() 
         {
             _collider = GetComponent<Collider>();
-            Init();
+            _renderer = GetComponentInChildren<MeshRenderer>();
+            RB = GetComponent<Rigidbody>();
         }
 
-        public void Init()
-        {     
-            var gradient = new Gradient();
-
-            gradient.SetKeys
-            (
-                new GradientColorKey[]
-                {
-                    new GradientColorKey(Color.yellow, 0f),
-                    new GradientColorKey(Color.green, 0.2f),
-                    new GradientColorKey(Color.blue, 0.4f),
-                    new GradientColorKey(Color.magenta, 0.6f),
-                    new GradientColorKey(Color.cyan, 0.8f),
-                    new GradientColorKey(Color.red, 1f)
-                },
-                new GradientAlphaKey[]
-                {
-                    new GradientAlphaKey(1f, 0f),
-                    new GradientAlphaKey(1f, 0.2f),
-                    new GradientAlphaKey(1f, 0.4f),
-                    new GradientAlphaKey(1f, 0.6f),
-                    new GradientAlphaKey(1f, 0.8f),
-                    new GradientAlphaKey(1f, 1f),
-                }
-            );
-
-            var value = UnityEngine.Random.Range(0, 1f);
-            var rndColor = gradient.Evaluate(value);
-
-            GetComponentInChildren<MeshRenderer>().materials[0].SetColor("_BaseColor", rndColor);
+        public void Init(Color color, EcsWorld world, EcsPackedEntity ecsPackedEntity)
+        {   
+            _world = world;
+            _packedEntity = ecsPackedEntity;
+            
+            _renderer.materials[0].SetColor("_BaseColor", color);
         }
 
         public void OnEat()
-        {
+        {          
             Destroy(this.gameObject);
         }
 
         public void Take(Transform tip)
         {
+            if (_packedEntity.Unpack(_world, out int entity))
+            {
+                _world.GetPool<EatFoodEvent>().Add(entity);
+            }
+
             transform.SetParent(tip);
             _collider.enabled = false;
         }

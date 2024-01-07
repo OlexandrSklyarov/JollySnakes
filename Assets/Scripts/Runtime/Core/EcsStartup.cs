@@ -10,6 +10,7 @@ using SA.Runtime.Core.Systems;
 using SA.Runtime.Core.Data.Configs;
 using SA.Runtime.Core.Services.Factories;
 using SA.Runtime.Core.Services;
+using SA.Runtime.Core.Views;
 
 namespace SA.Runtime.Core 
 {
@@ -28,7 +29,8 @@ namespace SA.Runtime.Core
             IInputService inputService,
             CinemachineFreeLook followCamera,
             IUnitFactory unitFactory,
-            IPhysicsOverlapService overlapService
+            IPhysicsOverlapService overlapService,
+            EmittersRoot emittersRoot
         )
         {
             _sharedData = new SharedData()
@@ -38,7 +40,8 @@ namespace SA.Runtime.Core
                 InputService = inputService,
                 FollowCamera = followCamera,
                 UnitFactory = unitFactory,
-                OverlapService = overlapService
+                OverlapService = overlapService,
+                EmittersRoot = emittersRoot
             };
         }
 
@@ -75,6 +78,7 @@ namespace SA.Runtime.Core
                 .Add(new PlayerSpeedLimitSystem())  
                 .Add(new PlayerJumpSystem())   
                 .Add(new AddSnakeTailSystem())   
+                .Add(new SpawnFoodSystem())   
                 .Init();
 
             //fixed update

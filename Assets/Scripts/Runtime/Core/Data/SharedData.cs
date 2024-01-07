@@ -15,5 +15,6 @@ namespace SA.Runtime.Core.Data
         public CinemachineFreeLook FollowCamera;
         public IUnitFactory UnitFactory;
         public IPhysicsOverlapService OverlapService;
+        public EmittersRoot EmittersRoot;
     }
 }

@@ -22,5 +22,6 @@ namespace SA.Runtime.Core.Data.Configs
     {
         [field: SerializeField] public SnakeView SnakePrefab {get; private set;}
         [field: SerializeField] public TailPartView TailPartPrefab {get; private set;}
+        [field: SerializeField] public FoodView FoodPrefab {get; private set;}
     }
 }

@@ -15,6 +15,19 @@ namespace SA.Runtime.Core.Services.Factories
             _container = new GameObject("[Units_Container]").transform;
         }
 
+        FoodView IUnitFactory.CreateFood(Vector3 position, Quaternion rotation)
+        {
+            var food = UnityEngine.Object.Instantiate
+            (
+                _config.Unit.FoodPrefab,
+                position,
+                rotation,
+                _container
+            );
+
+            return food;
+        }
+
         SnakeView IUnitFactory.CreateSnake()
         {
             var snake = UnityEngine.Object.Instantiate

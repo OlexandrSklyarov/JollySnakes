@@ -26,6 +26,7 @@ namespace SA.Runtime.DI
 
             builder.RegisterComponentInHierarchy<EcsStartup>();
             builder.RegisterComponentInHierarchy<CinemachineFreeLook>();
+            builder.RegisterComponentInHierarchy<EmittersRoot>();
 
             RegisterInput(builder);
         }
