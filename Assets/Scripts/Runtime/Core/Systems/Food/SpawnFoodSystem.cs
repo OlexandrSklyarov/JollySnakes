@@ -44,6 +44,7 @@ namespace SA.Runtime.Core.Systems
             {
                 var entity = _world.NewEntity();
                 ref var emitter = ref _emitterPool.Add(entity);
+                emitter.Config = view.Config;
                 emitter.SpawnPoints = view.SpawnPoints;
             }    
         }
@@ -95,7 +96,7 @@ namespace SA.Runtime.Core.Systems
             var entity = _world.NewEntity();
 
             var point = emitter.SpawnPoints.RandomElement();
-            var randomRotVector = point.transform.forward.AddDirectionSpread(0.5f);
+            var randomRotVector = point.transform.forward.AddDirectionSpread(emitter.Config.SpawnSpread);
             var rotation = Quaternion.LookRotation(randomRotVector);
 
             var view = _unitFactory.CreateFood(point.position, rotation);            
@@ -114,7 +115,7 @@ namespace SA.Runtime.Core.Systems
             //push
             body.RbRef.AddForce
             (
-                body.RbRef.transform.forward * UnityEngine.Random.Range(10f, 15f),
+                body.RbRef.transform.forward * UnityEngine.Random.Range(emitter.Config.MinPushItemForce, emitter.Config.MaxPushItemForce),
                 ForceMode.Impulse
             );
         }

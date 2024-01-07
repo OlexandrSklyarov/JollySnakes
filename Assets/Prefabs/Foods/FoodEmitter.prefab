@@ -72,6 +72,8 @@ MonoBehaviour:
   <SpawnPoints>k__BackingField:
   - {fileID: 2418230782700527085}
   - {fileID: 480991841265838861}
+  <Config>k__BackingField: {fileID: 11400000, guid: 8d88eac2b45c06fe5bd91c43f47bc192,
+    type: 2}
 --- !u!1 &1168142388910184179
 GameObject:
   m_ObjectHideFlags: 0
