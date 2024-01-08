@@ -1,32 +1,32 @@
+using System;
 using SA.Runtime.Core.Data.Configs;
 using SA.Runtime.Core.Views;
 using UnityEngine;
 
 namespace SA.Runtime.Core.Services.Factories
 {
-    public sealed class LocalUnitFactory : IUnitFactory
+    public sealed class LocalUnitFactory : IUnitFactory, IDisposable
     {
         private GameConfig _config;
         private Transform _container;
+        private UniversalPoolGO<FoodView> _foodPool;
 
         public LocalUnitFactory(GameConfig config)
         {
             _config = config;
             _container = new GameObject("[Units_Container]").transform;
+       
+            _foodPool = new UniversalPoolGO<FoodView>(_config.Unit.FoodPrefab, "[FOOD-POOL]");
         }
+        
 
         FoodView IUnitFactory.CreateFood(Vector3 position, Quaternion rotation)
         {
-            var food = UnityEngine.Object.Instantiate
-            (
-                _config.Unit.FoodPrefab,
-                position,
-                rotation,
-                _container
-            );
+            var food = _foodPool.Get();
+            food.transform.SetPositionAndRotation(position, rotation);
 
             return food;
-        }
+        }        
 
         SnakeView IUnitFactory.CreateSnake()
         {
@@ -50,6 +50,11 @@ namespace SA.Runtime.Core.Services.Factories
             );
 
             return snake;
+        }
+
+        public void Dispose()
+        {
+            _foodPool.Clear();
         }
     }
 }

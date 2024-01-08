@@ -1,11 +1,12 @@
 using Leopotam.EcsLite;
 using SA.Runtime.Core.Events;
+using SA.Runtime.Core.Services;
 using UnityEngine;
 
 namespace SA.Runtime.Core.Views
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class FoodView : MonoBehaviour
+    public class FoodView : MonoBehaviour, IPoolableItem<FoodView>
     {
         public Rigidbody RB {get; private set;}
 
@@ -13,6 +14,8 @@ namespace SA.Runtime.Core.Views
         private MeshRenderer _renderer;
         private EcsWorld _world;
         private EcsPackedEntity _packedEntity;
+        private IPool<FoodView> _myPool;        
+        
 
         private void Awake() 
         {
@@ -29,11 +32,6 @@ namespace SA.Runtime.Core.Views
             _renderer.materials[0].SetColor("_BaseColor", color);
         }
 
-        public void OnEat()
-        {          
-            Destroy(this.gameObject);
-        }
-
         public void Take(Transform tip)
         {
             if (_packedEntity.Unpack(_world, out int entity))
@@ -44,5 +42,9 @@ namespace SA.Runtime.Core.Views
             transform.SetParent(tip);
             _collider.enabled = false;
         }
+
+        public void OnEat() => _myPool.Reclaim(this);
+
+        void IPoolableItem<FoodView>.SetPool(IPool<FoodView> pool) => _myPool = pool;
     }
 }
