@@ -60,13 +60,13 @@ namespace SA.Runtime.Core.Systems
             {
                 var sizeMultiplier = 1f - (tail.Count + 1) / (float)maxCount;            
 
-                //view
+                //part view
                 var partView = _unitFactory.CreateTailPart();
                 partView.Init(sizeMultiplier);
                 var followTarget = GetPartFollowTarget(ref view, ref tail);
                 partView.transform.position = followTarget.position + Vector3.up;
 
-                //entity
+                //part entity
                 var partEntity = _world.NewEntity();
                 _tailPartPool.Add(partEntity).ViewRef = partView;
                 _partFollowPool.Add(partEntity).Target = followTarget;

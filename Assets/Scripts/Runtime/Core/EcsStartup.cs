@@ -78,7 +78,9 @@ namespace SA.Runtime.Core
                 .Add(new PlayerSpeedLimitSystem())  
                 .Add(new PlayerJumpSystem())   
                 .Add(new AddSnakeTailSystem())   
-                .Add(new SpawnFoodSystem())   
+
+                .Add(new SpawnFoodSystem())  
+                .Add(new KillFoodSystem()) 
                 .Init();
 
             //fixed update
