@@ -9,7 +9,8 @@ namespace SA.Runtime.Core.Services.Factories
     {
         private GameConfig _config;
         private Transform _container;
-        private UniversalPoolGO<FoodView> _foodPool;
+        private readonly UniversalPoolGO<FoodView> _foodPool;
+        private readonly UniversalPoolGO<TailPartView> _tailPartPool;
 
         public LocalUnitFactory(GameConfig config)
         {
@@ -17,6 +18,7 @@ namespace SA.Runtime.Core.Services.Factories
             _container = new GameObject("[Units_Container]").transform;
        
             _foodPool = new UniversalPoolGO<FoodView>(_config.Unit.FoodPrefab, "[FOOD-POOL]");
+            _tailPartPool = new UniversalPoolGO<TailPartView>(_config.Unit.TailPartPrefab, "[TAIL_PART-POOL]");
         }
         
 
@@ -42,19 +44,14 @@ namespace SA.Runtime.Core.Services.Factories
         }
 
         TailPartView IUnitFactory.CreateTailPart()
-        {
-            var snake = UnityEngine.Object.Instantiate
-            (
-                _config.Unit.TailPartPrefab,
-                _container
-            );
-
-            return snake;
+        {            
+            return _tailPartPool.Get();
         }
 
         public void Dispose()
         {
             _foodPool.Clear();
+            _tailPartPool.Clear();
         }
     }
 }
