@@ -20,6 +20,8 @@ namespace SA.Runtime.Core.Data.Configs
         [field: SerializeField, Min(1f)] public float Acceleration {get; private set;} = 20f;
         [field: SerializeField, Min(1f)] public float RotationSpeed {get; private set;} = 6f;
         [field: SerializeField, Min(1f)] public float AdditionalGravity {get; private set;} = 6f;
+        [field: SerializeField, Min(0f)] public float GroundDrag {get; private set;} = 2f;
+        [field: SerializeField, Min(0f)] public float AirDrag {get; private set;} = 0f;
         [field: SerializeField] public LayerMask GroundLayerMask {get; private set;}
         [field: SerializeField] public Vector3 CheckGroundBounds {get; private set;} = new Vector3(1f, 0.1f, 1f);       
     }

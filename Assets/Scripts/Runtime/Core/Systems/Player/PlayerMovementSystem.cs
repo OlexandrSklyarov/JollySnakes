@@ -3,6 +3,7 @@ using Leopotam.EcsLite;
 using SA.Runtime.Core.Components;
 using SA.Runtime.Core.Data;
 using SA.Runtime.Core.Services.Time;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace SA.Runtime.Core.Systems
@@ -71,7 +72,10 @@ namespace SA.Runtime.Core.Systems
 
         private void Movement(ref InputComponent input, ref PlayerViewComponent view, ref MovementComponent movement)
         {
-            view.ViewRef.RB.drag = (movement.IsGrounded) ? 2f : 0.005f;
+            view.ViewRef.RB.drag = (movement.IsGrounded) ? 
+                view.ViewRef.Config.Movement.GroundDrag : 
+                view.ViewRef.Config.Movement.AirDrag;
+
             movement.CameraRelativeMovement = GetRelativeCameraDirection(ref input);
             
             view.ViewRef.RB.AddForce
