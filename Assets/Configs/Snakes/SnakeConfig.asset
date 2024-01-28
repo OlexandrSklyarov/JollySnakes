@@ -59,3 +59,34 @@ MonoBehaviour:
     <Cooldown>k__BackingField: 0.25
   <Tail>k__BackingField:
     <MaxVisibleCount>k__BackingField: 8
+  <View>k__BackingField:
+    <ColorBodyGradient>k__BackingField:
+      serializedVersion: 2
+      key0: {r: 0.92178863, g: 0.12176475, b: 0.12176475, a: 1}
+      key1: {r: 0.89341533, g: 0.7201444, b: 0.14694221, a: 1}
+      key2: {r: 0.27231058, g: 0.79178375, b: 0.327694, a: 0}
+      key3: {r: 0.6218451, g: 0.27696157, b: 0.80682546, a: 0}
+      key4: {r: 0.6775081, g: 0.6775081, b: 0.6775081, a: 0}
+      key5: {r: 0.19688256, g: 0.49762973, b: 0.76144123, a: 0}
+      key6: {r: 0.833985, g: 0.1741669, b: 0.5005118, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 9445
+      ctime2: 20432
+      ctime3: 32875
+      ctime4: 41056
+      ctime5: 49872
+      ctime6: 65532
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_ColorSpace: 0
+      m_NumColorKeys: 7
+      m_NumAlphaKeys: 2

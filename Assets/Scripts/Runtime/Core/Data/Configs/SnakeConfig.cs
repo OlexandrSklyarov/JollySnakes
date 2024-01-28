@@ -10,6 +10,7 @@ namespace SA.Runtime.Core.Data.Configs
         [field: Space, SerializeField] public Tongue Tongue {get; private set;}
         [field: Space, SerializeField] public Jump Jump {get; private set;}
         [field: Space, SerializeField] public Tail Tail {get; private set;}
+        [field: Space, SerializeField] public View View {get; private set;}
     }
 
     [Serializable]
@@ -46,5 +47,11 @@ namespace SA.Runtime.Core.Data.Configs
     public class Tail
     {
         [field: SerializeField, Min(1)] public int MaxVisibleCount {get; private set;} = 8;
+    }
+
+    [Serializable]
+    public class View
+    {
+        [field: SerializeField] public Gradient ColorBodyGradient {get; private set;} = new Gradient();
     }
 }

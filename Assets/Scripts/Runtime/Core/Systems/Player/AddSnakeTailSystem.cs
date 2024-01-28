@@ -62,7 +62,7 @@ namespace SA.Runtime.Core.Systems
 
                 //part view
                 var partView = _unitFactory.CreateTailPart();
-                partView.Init(sizeMultiplier);
+                partView.Init(sizeMultiplier, view.MyBodyColor);
                 var followTarget = GetPartFollowTarget(ref view, ref tail);
                 partView.transform.position = followTarget.position + Vector3.up;
 

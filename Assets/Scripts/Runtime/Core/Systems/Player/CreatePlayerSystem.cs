@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Leopotam.EcsLite;
 using SA.Runtime.Core.Components;
@@ -34,10 +35,18 @@ namespace SA.Runtime.Core.Systems
             ref var view = ref world.GetPool<PlayerViewComponent>().Add(entity);
             view.ViewRef = snakeView;
             view.ViewRef.Tongue.BodyRenderer.SetPositions(new Vector3[2]);
+            SetColorBody(ref view);
 
             //tongue
             ref var tongue = ref world.GetPool<TongueComponent>().Add(entity);
             tongue.AttackDistanceMultiplier = 1f;            
-        }       
+        }
+
+        private void SetColorBody(ref PlayerViewComponent view)
+        {
+            var color = view.ViewRef.Config.View.ColorBodyGradient.Evaluate(UnityEngine.Random.value);
+            view.ViewRef.BodyRenderer.materials[0].color = color;
+            view.MyBodyColor = color;
+        }
     }
 }

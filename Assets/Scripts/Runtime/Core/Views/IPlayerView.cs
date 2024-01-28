@@ -9,5 +9,6 @@ namespace SA.Runtime.Core.Views
         public SnakeTongueView Tongue { get; }
         public SnakeConfig Config { get; }
         public Transform TailRoot { get; }
+        public MeshRenderer BodyRenderer { get; }
     }
 }

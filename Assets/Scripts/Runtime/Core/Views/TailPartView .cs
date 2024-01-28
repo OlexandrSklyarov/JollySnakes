@@ -10,6 +10,8 @@ namespace SA.Runtime.Core.Views
         public float MoveSpeed => _config.MoveSpeed;
 
         [SerializeField] private TailPartConfig _config;
+        [SerializeField] private MeshRenderer _bodyRenderer;
+
         private IPool<TailPartView> _pool;
 
         public void Restore()
@@ -17,9 +19,11 @@ namespace SA.Runtime.Core.Views
             _pool.Reclaim(this);
         }
 
-        public void Init(float sizeMultiplier)
+        public void Init(float sizeMultiplier, Color newColor)
         {
             transform.localScale = Vector3.one * Mathf.Clamp(sizeMultiplier, _config.MinScale, 1f);
+
+            _bodyRenderer.materials[0].color = newColor;
         }
 
         void IPoolableItem<TailPartView>.SetPool(IPool<TailPartView> pool)

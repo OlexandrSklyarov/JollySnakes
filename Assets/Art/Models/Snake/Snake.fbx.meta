@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: ShakeMat
-    second: {fileID: 2100000, guid: fd949cef67939e0c18bed626f2e6f03c, type: 2}
+    second: {fileID: 2100000, guid: 0cb231571a608f8cdb2fb69cc390e066, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: SnakeOther
-    second: {fileID: 2100000, guid: b2817a3df549789a48ee3446f72e46e6, type: 2}
+    second: {fileID: 2100000, guid: 0cb231571a608f8cdb2fb69cc390e066, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
