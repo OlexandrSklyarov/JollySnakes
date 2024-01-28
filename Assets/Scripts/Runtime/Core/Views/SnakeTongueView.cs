@@ -8,5 +8,6 @@ namespace SA.Runtime.Core.Views
     {
         [field: SerializeField] public Transform Tip {get; private set;} 
         [field: SerializeField] public Transform Origin {get; private set;} 
+        [field: SerializeField] public LineRenderer BodyRenderer {get; private set;} 
     }
 }

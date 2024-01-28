@@ -18,13 +18,15 @@ MonoBehaviour:
     <Acceleration>k__BackingField: 70
     <RotationSpeed>k__BackingField: 15
     <AdditionalGravity>k__BackingField: 6
+    <GroundDrag>k__BackingField: 2
+    <AirDrag>k__BackingField: 0
     <GroundLayerMask>k__BackingField:
       serializedVersion: 2
-      m_Bits: 1
+      m_Bits: 17
     <CheckGroundBounds>k__BackingField: {x: 1, y: 0.1, z: 1}
   <Tongue>k__BackingField:
     <BaseBoundSize>k__BackingField: {x: 2, y: 1, z: 6}
-    <AttackTime>k__BackingField: 0.4
+    <AttackReloadingTime>k__BackingField: 0.5
     <FoodLayerMask>k__BackingField:
       serializedVersion: 2
       m_Bits: 64

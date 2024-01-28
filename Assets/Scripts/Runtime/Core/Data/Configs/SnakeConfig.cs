@@ -30,7 +30,7 @@ namespace SA.Runtime.Core.Data.Configs
     public class Tongue
     {
         [field: SerializeField] public Vector3 BaseBoundSize {get; private set;} = new Vector3(1f, 1f, 4f);
-        [field: SerializeField, Min(0.1f)] public float AttackTime {get; private set;} = 0.5f;  
+        [field: SerializeField, Min(0.1f)] public float AttackReloadingTime {get; private set;} = 0.5f;  
         [field: SerializeField] public LayerMask FoodLayerMask {get; private set;}
         [field: SerializeField] public AnimationCurve EatCurve {get; private set;}
     }

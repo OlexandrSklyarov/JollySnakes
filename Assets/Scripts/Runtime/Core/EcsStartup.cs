@@ -73,10 +73,12 @@ namespace SA.Runtime.Core
                 .Add(new CreatePlayerSystem())
                 .Add(new PlayerCheckGroundSystem())
                 .Add(new PlayerInputSystem()) 
+                .Add(new PlayerReloadingAttackSystem())
                 .Add(new PlayerAttackSystem())        
                 .Add(new PlayerSpeedLimitSystem())  
                 .Add(new PlayerJumpSystem())   
-                .Add(new AddSnakeTailSystem())   
+                .Add(new AddSnakeTailSystem())  
+                .Add(new DrawTongueBodySystem()) 
 
                 .Add(new SpawnFoodSystem())  
                 .Add(new KillFoodSystem()) 

@@ -45,7 +45,7 @@ namespace SA.Runtime.Core.Systems
                 ref var view = ref _viewPool.Get(ent);
                 ref var tongue = ref _tonguePool.Get(ent);
 
-                if (tongue.NextAttackTime > _time.Time)
+                if (tongue.AttackReloadingTimer > 0f)
                     continue;
 
                 SetAttackCooldown(ref view, ref tongue);
@@ -61,7 +61,7 @@ namespace SA.Runtime.Core.Systems
 
         private void SetAttackCooldown(ref PlayerViewComponent view, ref TongueComponent tongue)
         {
-            tongue.NextAttackTime = _time.Time + view.ViewRef.Config.Tongue.AttackTime;
+            tongue.AttackReloadingTimer = view.ViewRef.Config.Tongue.AttackReloadingTime;
         }
       
 
@@ -73,7 +73,7 @@ namespace SA.Runtime.Core.Systems
         private bool TryEatFood(ref PlayerViewComponent view, ref TongueComponent tongue)
         {
             var config = view.ViewRef.Config; 
-            var duration = (tongue.NextAttackTime - _time.Time) * 0.5f;
+            var duration = tongue.AttackReloadingTimer * 0.5f;
 
             var halfExtend = (config.Tongue.BaseBoundSize + new Vector3(0f, 0f, tongue.AttackDistanceMultiplier)) * 0.5f;
 

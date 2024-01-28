@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using SA.Runtime.Core.Components;
 using SA.Runtime.Core.Data;
+using UnityEngine;
 
 namespace SA.Runtime.Core.Systems
 {
@@ -32,10 +33,11 @@ namespace SA.Runtime.Core.Systems
             //view
             ref var view = ref world.GetPool<PlayerViewComponent>().Add(entity);
             view.ViewRef = snakeView;
+            view.ViewRef.Tongue.BodyRenderer.SetPositions(new Vector3[2]);
 
             //tongue
             ref var tongue = ref world.GetPool<TongueComponent>().Add(entity);
-            tongue.AttackDistanceMultiplier = 1f;
+            tongue.AttackDistanceMultiplier = 1f;            
         }       
     }
 }
