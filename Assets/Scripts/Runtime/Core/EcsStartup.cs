@@ -15,7 +15,8 @@ namespace SA.Runtime.Core
 {
     sealed class EcsStartup : MonoBehaviour 
     {
-        private EcsWorld _world;        
+        private EcsWorld _world;
+        private EcsWorld _eventsWorld;
         private IEcsSystems _updateSystems;
         private IEcsSystems _fixedUpdateSystems;
         private IEcsSystems _lateUpdateSystems;
@@ -50,6 +51,8 @@ namespace SA.Runtime.Core
             Cursor.lockState = CursorLockMode.Locked;
 
             _world = new EcsWorld();
+            _eventsWorld = new EcsWorld ();
+
             _updateSystems = new EcsSystems(_world, _sharedData);
             _fixedUpdateSystems = new EcsSystems(_world, _sharedData);
             _lateUpdateSystems = new EcsSystems(_world, _sharedData);
@@ -60,12 +63,10 @@ namespace SA.Runtime.Core
         }
 
         private void RegisterSystems()
-        {
-            var eventsWorld = new EcsWorld ();
-
+        {    
             //update
             _updateSystems                
-                .AddWorld (eventsWorld, GameConst.World.EVENTS)
+                .AddWorld (_eventsWorld, GameConst.World.EVENTS)
             #if UNITY_EDITOR
                 .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem (GameConst.World.EVENTS))
                 .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ())
@@ -86,7 +87,7 @@ namespace SA.Runtime.Core
 
             //fixed update
             _fixedUpdateSystems                
-                .AddWorld (eventsWorld, GameConst.World.EVENTS)
+                .AddWorld (_eventsWorld, GameConst.World.EVENTS)
             #if UNITY_EDITOR
                 .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem (GameConst.World.EVENTS))
                 .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ())
@@ -97,7 +98,7 @@ namespace SA.Runtime.Core
 
             //late update
             _lateUpdateSystems                
-                .AddWorld (eventsWorld, GameConst.World.EVENTS)
+                .AddWorld (_eventsWorld, GameConst.World.EVENTS)
             #if UNITY_EDITOR
                 .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem (GameConst.World.EVENTS))
                 .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ())
@@ -132,7 +133,10 @@ namespace SA.Runtime.Core
             _lateUpdateSystems = null;        
 
             _world?.Destroy ();
-            _world = null;            
+            _world = null;     
+
+            _eventsWorld?.Destroy ();
+            _eventsWorld = null;          
         }
     }
 }
