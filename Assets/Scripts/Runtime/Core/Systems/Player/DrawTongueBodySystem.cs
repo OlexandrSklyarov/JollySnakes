@@ -26,11 +26,11 @@ namespace SA.Runtime.Core.Systems
             {
                 ref var view = ref viewPool.Get(ent);   
 
-                var pointA = view.ViewRef.Tongue.Origin;   
-                var pointB = view.ViewRef.Tongue.Tip;            
+                var pointA = view.Tongue.Origin;   
+                var pointB = view.Tongue.Tip;            
 
-                view.ViewRef.Tongue.BodyRenderer.SetPosition(0, pointA.position);
-                view.ViewRef.Tongue.BodyRenderer.SetPosition(1, pointB.position);
+                view.Tongue.BodyRenderer.SetPosition(0, pointA.position);
+                view.Tongue.BodyRenderer.SetPosition(1, pointB.position);
             }
         }
     }

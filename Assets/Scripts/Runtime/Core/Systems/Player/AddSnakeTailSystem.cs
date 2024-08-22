@@ -54,7 +54,7 @@ namespace SA.Runtime.Core.Systems
 
         private void CreateTailPart(ref PlayerViewComponent view, ref SnakeTailComponent tail)
         {
-            var maxCount = view.ViewRef.Config.Tail.MaxVisibleCount;
+            var maxCount = view.Config.Tail.MaxVisibleCount;
 
             if (tail.PartEntities.Count < maxCount)
             {
@@ -82,7 +82,7 @@ namespace SA.Runtime.Core.Systems
         {
             if (tail.PartEntities.Count <= 0) 
             {
-                return view.ViewRef.TailRoot;
+                return view.TailRoot;
             }
 
             var lastPartEntity = tail.PartEntities.Peek();            

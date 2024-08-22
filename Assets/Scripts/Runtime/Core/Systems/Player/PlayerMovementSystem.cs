@@ -62,32 +62,32 @@ namespace SA.Runtime.Core.Systems
 
             var newRot = Quaternion.Slerp
             (
-                view.ViewRef.RB.transform.rotation,
+                view.RB.transform.rotation,
                 Quaternion.LookRotation(lookAt),
-                view.ViewRef.Config.Movement.RotationSpeed * _time.FixedDeltaTime
+                view.Config.Movement.RotationSpeed * _time.FixedDeltaTime
             );
 
-            view.ViewRef.RB.MoveRotation(newRot);
+            view.RB.MoveRotation(newRot);
         }
 
         private void Movement(ref InputComponent input, ref PlayerViewComponent view, ref MovementComponent movement)
         {
-            view.ViewRef.RB.drag = (movement.IsGrounded) ? 
-                view.ViewRef.Config.Movement.GroundDrag : 
-                view.ViewRef.Config.Movement.AirDrag;
+            view.RB.drag = (movement.IsGrounded) ? 
+                view.Config.Movement.GroundDrag : 
+                view.Config.Movement.AirDrag;
 
             movement.CameraRelativeMovement = GetRelativeCameraDirection(ref input);
             
-            view.ViewRef.RB.AddForce
+            view.RB.AddForce
             (
-                view.ViewRef.Config.Movement.Acceleration * movement.CameraRelativeMovement, 
+                view.Config.Movement.Acceleration * movement.CameraRelativeMovement, 
                 ForceMode.Acceleration
             );
 
             //apply additional gravity
-            view.ViewRef.RB.AddForce
+            view.RB.AddForce
             (
-                new Vector3(0f, -view.ViewRef.Config.Movement.AdditionalGravity, 0f), 
+                new Vector3(0f, -view.Config.Movement.AdditionalGravity, 0f), 
                 ForceMode.Acceleration
             );
 
@@ -99,14 +99,14 @@ namespace SA.Runtime.Core.Systems
 
         private void DampingVelocity(ref PlayerViewComponent view)
         {
-            var curVel = view.ViewRef.RB.velocity;
+            var curVel = view.RB.velocity;
             var newVel = new Vector3(curVel.x, 0f, curVel.z);
 
-            if (newVel.magnitude < view.ViewRef.Config.Movement.MinSpeed) return;
+            if (newVel.magnitude < view.Config.Movement.MinSpeed) return;
 
             newVel *= 0.95f;
             newVel.y = curVel.y;
-            view.ViewRef.RB.velocity = newVel;
+            view.RB.velocity = newVel;
         }
 
         private Vector3 GetRelativeCameraDirection(ref InputComponent input)

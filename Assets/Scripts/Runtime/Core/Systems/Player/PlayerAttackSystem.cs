@@ -61,7 +61,7 @@ namespace SA.Runtime.Core.Systems
 
         private void SetAttackCooldown(ref PlayerViewComponent view, ref TongueComponent tongue)
         {
-            tongue.AttackReloadingTimer = view.ViewRef.Config.Tongue.AttackReloadingTime;
+            tongue.AttackReloadingTimer = view.Config.Tongue.AttackReloadingTime;
         }
       
 
@@ -72,16 +72,16 @@ namespace SA.Runtime.Core.Systems
 
         private bool TryEatFood(ref PlayerViewComponent view, ref TongueComponent tongue)
         {
-            var config = view.ViewRef.Config; 
+            var config = view.Config; 
             var duration = tongue.AttackReloadingTimer * 0.5f;
 
             var halfExtend = (config.Tongue.BaseBoundSize + new Vector3(0f, 0f, tongue.AttackDistanceMultiplier)) * 0.5f;
 
             if (_overlapService.TryGetBoxOverlapTarget
             (
-                view.ViewRef.Tongue.Origin.position + view.ViewRef.Tongue.Origin.forward * halfExtend.z,
+                view.Tongue.Origin.position + view.Tongue.Origin.forward * halfExtend.z,
                 halfExtend,
-                view.ViewRef.Tongue.Origin.rotation,
+                view.Tongue.Origin.rotation,
                 config.Tongue.FoodLayerMask,
                 out FoodView target
             ))
@@ -96,10 +96,10 @@ namespace SA.Runtime.Core.Systems
 
         private void SimpleAttack(ref PlayerViewComponent view, float duration)
         {
-            var config = view.ViewRef.Config;
+            var config = view.Config;
             var value = config.Tongue.BaseBoundSize.z;
 
-            var tip = view.ViewRef.Tongue.Tip;
+            var tip = view.Tongue.Tip;
 
             tip.DOLocalMoveZ(value, duration)
                 .OnComplete(() =>
@@ -110,15 +110,15 @@ namespace SA.Runtime.Core.Systems
 
         private void TakeFood(ref PlayerViewComponent view, FoodView target, float duration)
         {           
-            var config = view.ViewRef.Config;
+            var config = view.Config;
 
-            var tip = view.ViewRef.Tongue.Tip;
+            var tip = view.Tongue.Tip;
             var targetDir = target.transform.position - tip.position;
             tip.rotation = Quaternion.LookRotation(targetDir);
 
             if (targetDir.magnitude < 0.5f) duration *= 0.5f;                
             
-            var endPos = view.ViewRef.Tongue.Origin.InverseTransformPoint(target.transform.position);
+            var endPos = view.Tongue.Origin.InverseTransformPoint(target.transform.position);
 
             //move to target
             tip.DOLocalMove(endPos, duration)

@@ -29,9 +29,9 @@ namespace SA.Runtime.Core.Systems
             {
                 ref var view = ref _viewPool.Get(ent);
 
-                var curVelocity = view.ViewRef.RB.velocity;
+                var curVelocity = view.RB.velocity;
                 var horVelocity = new Vector3(curVelocity.x, 0f, curVelocity.z);
-                var speed = view.ViewRef.Config.Movement.MaxSpeed;
+                var speed = view.Config.Movement.MaxSpeed;
 
                 if (horVelocity.sqrMagnitude <= speed * speed) continue;
 
@@ -39,10 +39,10 @@ namespace SA.Runtime.Core.Systems
 
                 if (_attackStatePool.Has(ent))
                 {
-                    limitedVelocity = horVelocity.normalized * view.ViewRef.Config.Movement.MinSpeed;
+                    limitedVelocity = horVelocity.normalized * view.Config.Movement.MinSpeed;
                 }    
                 
-                view.ViewRef.RB.velocity = new Vector3(limitedVelocity.x, curVelocity.y, limitedVelocity.z);       
+                view.RB.velocity = new Vector3(limitedVelocity.x, curVelocity.y, limitedVelocity.z);       
             }
         }
     }

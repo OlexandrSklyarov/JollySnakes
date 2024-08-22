@@ -33,19 +33,27 @@ namespace SA.Runtime.Core.Systems
             
             //view
             ref var view = ref world.GetPool<PlayerViewComponent>().Add(entity);
-            view.ViewRef = snakeView;
-            view.ViewRef.Tongue.BodyRenderer.SetPositions(new Vector3[2]);
+            view.RB = snakeView.RB;
+            view.Tongue = snakeView.Tongue;
+            view.Config = snakeView.Config;
+            view.TailRoot = snakeView.TailRoot;
+            view.BodyRenderer = snakeView.BodyRenderer;
+            
+            view.Tongue.BodyRenderer.SetPositions(new Vector3[2]);
             SetColorBody(ref view);
 
             //tongue
             ref var tongue = ref world.GetPool<TongueComponent>().Add(entity);
-            tongue.AttackDistanceMultiplier = 1f;            
+            tongue.AttackDistanceMultiplier = 1f; 
+
+            //destroy monoBehaviour
+            UnityEngine.Object.Destroy(snakeView);           
         }
 
         private void SetColorBody(ref PlayerViewComponent view)
         {
-            var color = view.ViewRef.Config.View.ColorBodyGradient.Evaluate(UnityEngine.Random.value);
-            view.ViewRef.BodyRenderer.materials[0].color = color;
+            var color = view.Config.View.ColorBodyGradient.Evaluate(UnityEngine.Random.value);
+            view.BodyRenderer.materials[0].color = color;
             view.MyBodyColor = color;
         }
     }

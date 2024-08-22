@@ -7,7 +7,7 @@ using Util;
 namespace SA.Runtime.Core.Views
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class FoodView : MonoBehaviour, IPoolableItem<FoodView>
+    public sealed class FoodView : MonoBehaviour, IPoolableItem<FoodView>
     {
         public Rigidbody RB {get; private set;}
 

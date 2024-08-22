@@ -40,17 +40,17 @@ namespace SA.Runtime.Core.Systems
 
         private bool IsGroundChecked(ref PlayerViewComponent view)
         {
-            var origin = view.ViewRef.RB.transform.position + Vector3.up;
-            var dist = 1f + view.ViewRef.Config.Movement.CheckGroundBounds.y;
+            var origin = view.RB.transform.position + Vector3.up;
+            var dist = 1f + view.Config.Movement.CheckGroundBounds.y;
             
             return Physics.BoxCast
             (
                 origin, 
-                view.ViewRef.Config.Movement.CheckGroundBounds, 
+                view.Config.Movement.CheckGroundBounds, 
                 Vector3.down, 
                 Quaternion.LookRotation(Vector3.back), 
                 dist, 
-                view.ViewRef.Config.Movement.GroundLayerMask
+                view.Config.Movement.GroundLayerMask
             );
         }
     }
