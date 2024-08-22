@@ -66,7 +66,6 @@ namespace SA.Runtime.Core
             _updateSystems                
 
             #if UNITY_EDITOR
-                .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem (GameConst.World.EVENTS))
                 .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ())
             #endif
                 .Add(new CreatePlayerSystem())
@@ -87,7 +86,6 @@ namespace SA.Runtime.Core
             _fixedUpdateSystems    
 
             #if UNITY_EDITOR
-                .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem (GameConst.World.EVENTS))
                 .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ())
             #endif
                 .Add(new PlayerMovementSystem())
@@ -98,7 +96,6 @@ namespace SA.Runtime.Core
             _lateUpdateSystems                
 
             #if UNITY_EDITOR
-                .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem (GameConst.World.EVENTS))
                 .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ())
             #endif
                 .Init();

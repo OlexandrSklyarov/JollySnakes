@@ -4,7 +4,7 @@ using UnityEngine;
 namespace SA.Runtime.Core.Views
 {
     [RequireComponent(typeof(Rigidbody))]
-    public sealed class SnakeView : MonoBehaviour, IPlayerView
+    public sealed class SnakeView : MonoBehaviour
     {
         public Rigidbody RB {get; private set;}
         [field: SerializeField] public Transform TailRoot {get; private set;} 
