@@ -72,7 +72,7 @@ namespace SA.Runtime.Core.Systems
 
         private void Movement(ref InputComponent input, ref PlayerViewComponent view, ref MovementComponent movement)
         {
-            view.RB.drag = (movement.IsGrounded) ? 
+            view.RB.linearDamping = (movement.IsGrounded) ? 
                 view.Config.Movement.GroundDrag : 
                 view.Config.Movement.AirDrag;
 
@@ -99,14 +99,14 @@ namespace SA.Runtime.Core.Systems
 
         private void DampingVelocity(ref PlayerViewComponent view)
         {
-            var curVel = view.RB.velocity;
+            var curVel = view.RB.linearVelocity;
             var newVel = new Vector3(curVel.x, 0f, curVel.z);
 
             if (newVel.magnitude < view.Config.Movement.MinSpeed) return;
 
             newVel *= 0.95f;
             newVel.y = curVel.y;
-            view.RB.velocity = newVel;
+            view.RB.linearVelocity = newVel;
         }
 
         private Vector3 GetRelativeCameraDirection(ref InputComponent input)

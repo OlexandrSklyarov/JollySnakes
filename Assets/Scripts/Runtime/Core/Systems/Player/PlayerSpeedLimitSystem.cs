@@ -29,7 +29,7 @@ namespace SA.Runtime.Core.Systems
             {
                 ref var view = ref _viewPool.Get(ent);
 
-                var curVelocity = view.RB.velocity;
+                var curVelocity = view.RB.linearVelocity;
                 var horVelocity = new Vector3(curVelocity.x, 0f, curVelocity.z);
                 var speed = view.Config.Movement.MaxSpeed;
 
@@ -42,7 +42,7 @@ namespace SA.Runtime.Core.Systems
                     limitedVelocity = horVelocity.normalized * view.Config.Movement.MinSpeed;
                 }    
                 
-                view.RB.velocity = new Vector3(limitedVelocity.x, curVelocity.y, limitedVelocity.z);       
+                view.RB.linearVelocity = new Vector3(limitedVelocity.x, curVelocity.y, limitedVelocity.z);       
             }
         }
     }

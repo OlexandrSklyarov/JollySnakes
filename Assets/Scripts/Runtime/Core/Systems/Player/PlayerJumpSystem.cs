@@ -60,10 +60,10 @@ namespace SA.Runtime.Core.Systems
         private void Jump(ref PlayerViewComponent view, ref JumpComponent jump)
         {
             var rb = view.RB;
-            var vel = view.RB.velocity;
+            var vel = view.RB.linearVelocity;
             var config = view.Config;
 
-            rb.velocity = new Vector3(vel.x, 0f, vel.z);
+            rb.linearVelocity = new Vector3(vel.x, 0f, vel.z);
             
             rb.AddForce
             (
